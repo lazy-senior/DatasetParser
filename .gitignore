@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/obj/Debug/net6.0/DatasetParser.assets.cache
+/obj/Debug/net6.0/DatasetParser.GeneratedMSBuildEditorConfig.editorconfig
