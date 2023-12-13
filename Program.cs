@@ -41,7 +41,7 @@ class Program
     static void readUsedTempTables(IEnumerable<string>? lines){
         if(lines is null) return;
 
-        var currLine = string.Empty;
+        string currLine;
         var inDefineStatement = false;
 
         for(var i=0;i < lines.Count();i++)
@@ -85,7 +85,7 @@ class Program
         if(lines is null) return;
 
         foreach(var lineRead in lines){
-            //Console.WriteLine(lineRead);
+            
             if(lineRead.Trim().StartsWith("/*") || lineRead.Trim().StartsWith("//"))
                 continue;
 
