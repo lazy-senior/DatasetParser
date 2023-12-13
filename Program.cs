@@ -33,6 +33,30 @@ class Program
             }
         }
 
+        Console.WriteLine("Folgende TTs sind in relationships aber nicht definiert");
+        foreach(var tempTable in firstLevelTables){
+            if(!definedTempTables.Contains(tempTable)){
+                Console.WriteLine($"\t{tempTable}");
+            }
+        }
+        foreach(var tempTable in secondPlusLevelTables){
+            if(!definedTempTables.Contains(tempTable)){
+                Console.WriteLine($"\t{tempTable}");
+            }
+        }
+
+        Console.WriteLine("Folgende TTs sind in relationships aber nicht includiert");
+        foreach(var tempTable in firstLevelTables){
+            if(!includedTempTables.ContainsValue(tempTable)){
+                Console.WriteLine($"\t{tempTable}");
+            }
+        }
+        foreach(var tempTable in secondPlusLevelTables){
+            if(!includedTempTables.ContainsValue(tempTable)){
+                Console.WriteLine($"\t{tempTable}");
+            }
+        }
+
         Console.WriteLine($"Inkludierte Temp-Tables:{includedTempTables.Count()}, davon im Define-Statement:{definedTempTables.Count()}");
         Console.WriteLine($"Top-Level Temp-Tables:{firstLevelTables.Count()}, untergeordnete Temp-Tables:{secondPlusLevelTables.Count()}");
     }
@@ -76,7 +100,6 @@ class Program
                     }
                 }
             }
-
         }
     }
 
