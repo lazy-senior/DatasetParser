@@ -1,20 +1,25 @@
 ﻿using System.Text.RegularExpressions;
 using Proalpha.Dataset;
-
+using CommandLine;
 namespace DatasetParser;
 class Program
 {
 
     static void Main(string[] args)
     {
-        Dataset dataset = new ();
-        dataset.Parse("C:\\Users\\boening\\Downloads\\dataset.pds");
-
-        Console.WriteLine($"TempTable-Includes\t:{dataset.TempTables.Count()}");
-        Console.WriteLine($"TempTable-Defines\t:{dataset.DefinedTempTables.Count()}");
-        Console.WriteLine($"TempTable-Relationships\t:{dataset.DataRelations.Count()}");
-
-        dataset.PlausibilityCheck();
+        Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed<CommandLineOptions>(o => {
+            if (File.Exists(o.InputPath)){
+                    Dataset dataset = new();
+                    dataset.Parse(o.InputPath);
+                    
+                    Console.WriteLine($"Informationen zu Dataset:{o.InputPath}");
+                    Console.WriteLine("---");
+                    dataset.PlausibilityCheck();
+            } else {
+                Console.WriteLine($"Dataset konnte nicht gefunden werden:\r\n\t-i:'{o.InputPath}'");
+            }
+        });
+        
 
     }
 }

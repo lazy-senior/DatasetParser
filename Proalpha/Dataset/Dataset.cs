@@ -33,6 +33,11 @@ namespace Proalpha.Dataset
 
         public void PlausibilityCheck(){
             
+            Console.WriteLine($"TempTable-Includes\t:{TempTables.Count()}");
+            Console.WriteLine($"TempTable-Defines\t:{DefinedTempTables.Count()}");
+            Console.WriteLine($"TempTable-Relationships\t:{DataRelations.Count()}");
+            Console.WriteLine("---");
+
             Console.WriteLine("Folgende TTs sind includiert aber nicht definiert");
             foreach(var tempTable in TempTables){
                 if(!DefinedTempTables.Contains(tempTable.Name))
@@ -65,6 +70,7 @@ namespace Proalpha.Dataset
                     Console.WriteLine($"\t{relationshipMember}");
                 }
             }
+            Console.WriteLine("---");
             Console.WriteLine($"Anzahl an FirstLevel-TempTables {ParentTempTables.Count()}");
             Console.WriteLine($"Anzahl an distinct Child-TempTables {ChildTempTables.Distinct().Count()}");
         }

@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /obj/Debug/net6.0/DatasetParser.assets.cache
 /obj/Debug/net6.0/DatasetParser.GeneratedMSBuildEditorConfig.editorconfig
+.vscode/launch.json
