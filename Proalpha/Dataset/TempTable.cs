@@ -7,7 +7,7 @@ namespace Proalpha.Dataset
     {
         public string Name;
         public string Path;
-        private static readonly string TempTablePattern = @"{([^&}]*\.tdf)\s*{&\*}[^}]*}\s*\/\*\s*(\S*)";
+        private static readonly string TempTablePattern = @"^[\s]*([\/]*[\*]*)[\s]*{([^&}]*\.tdf)\s*{&\*}[^}]*}\s*\/\*\s*(\S*)";
         public TempTable(){}
         public TempTable(string name, string path)
         {
@@ -28,8 +28,8 @@ namespace Proalpha.Dataset
             tempTables = new();
             TempTable tempTable = new();
             var retValue = true;
-
-            var ttRegex = new Regex(TempTablePattern, RegexOptions.IgnoreCase);
+            
+            var ttRegex = new Regex(TempTablePattern, RegexOptions.IgnoreCase | RegexOptions.Multiline);
             var ttMatches = ttRegex.Matches(tempTableString);
             
             if(ttMatches.Count() == 0){
@@ -49,11 +49,11 @@ namespace Proalpha.Dataset
         {
             tempTable = new();
 
-            if(regexMatch.Success && regexMatch.Groups.Keys.Count() == 3){
+            if(regexMatch.Success && regexMatch.Groups.Keys.Count() == 4 && string.IsNullOrWhiteSpace(regexMatch.Groups[1].Value)){
                 tempTable = new()
                 {
-                    Path = regexMatch.Groups[1].Value,
-                    Name = regexMatch.Groups[2].Value
+                    Path = regexMatch.Groups[2].Value,
+                    Name = regexMatch.Groups[3].Value
                 };
                 return true;
             } 
