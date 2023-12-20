@@ -16,24 +16,27 @@ namespace DatasetParser
         static void Main(string[] args)
         {
 
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json");
-
-            IConfiguration configuration = builder.Build();
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
             var serviceProvider = new ServiceCollection()
                 .AddLogging()
                 .AddDbContext<ProalphaContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("Proalpha_Test"))
                 )
-                .AddSingleton<IDatasetPlausabilityService, DatasetPlausabilityService>()
+                .AddScoped<IDatasetPlausabilityService, DatasetPlausabilityService>()
                 .AddScoped<IConfiguration>(_ => configuration)
                 .BuildServiceProvider();
 
-            Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed<CommandLineOptions>(o => {
+            
+            Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed<CommandLineOptions>(async o => {
                 if (File.Exists(o.InputPath)){
-                       var datasetPlausabilityService = serviceProvider.GetService<IDatasetPlausabilityService>();
-                       datasetPlausabilityService.PrintCheck(o.InputPath);
+                        
+                        var datasetPlausabilityService = serviceProvider.GetService<IDatasetPlausabilityService>();
+                        if(datasetPlausabilityService != null){
+                            datasetPlausabilityService.PrintCheck(o.InputPath);
+                        }
                 } else {
                     Console.WriteLine($"Dataset konnte nicht gefunden werden:\r\n\t-i:'{o.InputPath}'");
                 }
