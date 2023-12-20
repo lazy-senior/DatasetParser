@@ -55,7 +55,6 @@ namespace Proalpha.Dataset
                 if(TryParseRegexMatchAsDataRelation(relMatch, out dataRelation)){
                     dataRelations.Add(dataRelation);
                 } else {
-                    Console.WriteLine($"Error[TryParseRegexMatchAsDataRelation]:{relMatch.Groups[0].Value}");
                     retValue = false;
                 }
             }
