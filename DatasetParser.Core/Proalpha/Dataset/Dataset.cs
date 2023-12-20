@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
@@ -6,10 +7,12 @@ namespace Proalpha.Dataset
     public class Dataset
     {
 
+        public string DatasetName;
         public List<TempTable> TempTables;
         public List<string> DefinedTempTables;
         public List<DataRelation> DataRelations;
         
+        private static readonly string DatasetNamePattern = @"SCOPED-DEFINE\s*ppDatasetName\s*(\S*)";
         private static readonly string DefinedTempTablePattern = @"define[^\.]*for([^\.]*)";
         //Close enough for now
         private static readonly string MultiLineCommentPattern = @"\/\*[^\*]*\*\/";
@@ -29,7 +32,10 @@ namespace Proalpha.Dataset
 
         private void ParseDataset(string dataSetFile) {
             if(string.IsNullOrWhiteSpace(dataSetFile)) return;
-
+            if(!TryParseDatasetName(dataSetFile,out DatasetName)){
+                Console.WriteLine("Datasetname nicht gefunden. Abbruch...");
+                return;
+            }
             if(!TempTable.TryParseMultiple(dataSetFile, out TempTables)){
                 Console.WriteLine("Fehler beim Parsen der TempTable-Includes");
             };
@@ -40,6 +46,17 @@ namespace Proalpha.Dataset
                 Console.WriteLine("Fehler beim Parsen der TempTable-Defines");
             }
 
+        }
+
+        private static bool TryParseDatasetName(string datasetFile, out string datasetName)
+        {
+            datasetName = "";
+            var nameMatch = Regex.Match(datasetFile, DatasetNamePattern, RegexOptions.IgnoreCase);
+            if(nameMatch.Success){
+                datasetName = nameMatch.Groups[1].Value;
+                return true;
+            }
+            return false;
         }
 
         private static bool TryParseDefinedTempTables(string defineString, out List<string> definedTempTables){
