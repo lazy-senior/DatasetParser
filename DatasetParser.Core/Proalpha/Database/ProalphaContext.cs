@@ -8,39 +8,35 @@ namespace DatasetParser.Core.Proalpa.Database;
 public partial class ProalphaContext : DbContext
 {
 
-    private readonly IConfiguration Configuration;
+    public IConfiguration Configuration { get; }
 
-    public ProalphaContext(IConfiguration configuration)
+    public ProalphaContext(DbContextOptions<ProalphaContext> options, IConfiguration configuration)
+        : base(options)
     {
         Configuration = configuration;
     }
 
-    public ProalphaContext(DbContextOptions<ProalphaContext> options)
-        : base(options)
-    {
-    }
+    public virtual DbSet<BG_Kopf> BG_Kopf { get; set; }
 
-    public virtual DbSet<VT_BG_Kopf> VT_BG_Kopf { get; set; }
+    public virtual DbSet<DRC_Class> DRC_Classes { get; set; }
 
-    public virtual DbSet<VT_DRC_Class> VT_DRC_Classes { get; set; }
+    public virtual DbSet<DRC_DSEntityAlloc> DRC_DSEntityAllocs { get; set; }
 
-    public virtual DbSet<VT_DRC_DSEntityAlloc> VT_DRC_DSEntityAllocs { get; set; }
+    public virtual DbSet<DRC_DataProvider> DRC_DataProviders { get; set; }
 
-    public virtual DbSet<VT_DRC_DataProvider> VT_DRC_DataProviders { get; set; }
+    public virtual DbSet<DRC_Dataset> DRC_Datasets { get; set; }
 
-    public virtual DbSet<VT_DRC_Dataset> VT_DRC_Datasets { get; set; }
+    public virtual DbSet<DRC_Entity> DRC_Entities { get; set; }
 
-    public virtual DbSet<VT_DRC_Entity> VT_DRC_Entities { get; set; }
+    public virtual DbSet<DRC_Instance> DRC_Instances { get; set; }
 
-    public virtual DbSet<VT_DRC_Instance> VT_DRC_Instances { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Proalpha_Test"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<VT_BG_Kopf>(entity =>
+        modelBuilder.Entity<BG_Kopf>(entity =>
         {
             entity
                 .HasNoKey()
@@ -72,7 +68,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_Class>(entity =>
+        modelBuilder.Entity<DRC_Class>(entity =>
         {
             entity
                 .HasNoKey()
@@ -92,7 +88,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_DSEntityAlloc>(entity =>
+        modelBuilder.Entity<DRC_DSEntityAlloc>(entity =>
         {
             entity
                 .HasNoKey()
@@ -109,7 +105,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_DataProvider>(entity =>
+        modelBuilder.Entity<DRC_DataProvider>(entity =>
         {
             entity
                 .HasNoKey()
@@ -132,7 +128,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_Dataset>(entity =>
+        modelBuilder.Entity<DRC_Dataset>(entity =>
         {
             entity
                 .HasNoKey()
@@ -164,7 +160,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_Entity>(entity =>
+        modelBuilder.Entity<DRC_Entity>(entity =>
         {
             entity
                 .HasNoKey()
@@ -184,7 +180,7 @@ public partial class ProalphaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<VT_DRC_Instance>(entity =>
+        modelBuilder.Entity<DRC_Instance>(entity =>
         {
             entity
                 .HasNoKey()

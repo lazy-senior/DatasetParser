@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DatasetParser.Core.Proalpa.Database.Entity;
 
-public partial class VT_DRC_DataProvider
+public partial class DRC_DataProvider
 {
     public string DAO_DRC_Instance_Obj { get; set; } = null!;
 

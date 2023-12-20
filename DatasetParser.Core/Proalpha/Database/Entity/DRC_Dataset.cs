@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DatasetParser.Core.Proalpa.Database.Entity;
 
-public partial class VT_DRC_Dataset
+public partial class DRC_Dataset
 {
     public string DRC_Dataset_ID { get; set; } = null!;
 

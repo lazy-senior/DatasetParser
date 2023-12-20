@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DatasetParser.Core.Proalpa.Database.Entity;
 
-public partial class VT_BG_Kopf
+public partial class BG_Kopf
 {
     public string Formular { get; set; } = null!;
 
