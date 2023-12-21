@@ -5,7 +5,21 @@ Programm zum Prüfen, ob die Temp Tables in einem Dataset korrekt includiert, de
 
 # Beispiel Ausgabe:
 
-Informationen zu Dataset:[Pfad zur PDS-Datei]
+Informationen zu Dataset:[DatasetName]
+
+---
+
+DRC_Dataset_ID		    :[]
+
+DatasetDefinitionFile	:[]
+
+MasterDataValidation	:[]
+
+---
+
+Formular:[Name von Formular welches das Dataset benutzt]
+
+Formular:[Name von Formular welches das Dataset benutzt]
 
 ---
 
