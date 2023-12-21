@@ -20,4 +20,6 @@ public partial class DRC_Entity
     public int EntityType { get; set; }
 
     public bool isTranslatable { get; set; }
+
+    public ICollection<DRC_DSEntityAlloc> DRC_DSEntityAllocations {get;set;} = null!;
 }

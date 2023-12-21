@@ -12,4 +12,8 @@ public partial class DRC_DSEntityAlloc
     public string DRC_Dataset_Obj { get; set; } = null!;
 
     public string DRC_Entity_Obj { get; set; } = null!;
+
+    public DRC_Dataset DRC_Dataset { get; set; } = null!;
+    
+    public DRC_Entity DRC_Entity { get; set; } = null!;
 }

@@ -28,4 +28,14 @@ public partial class DRC_Dataset
     public string DAO_DRC_Instance_Obj { get; set; } = null!;
 
     public string Proxy_DRC_Instance_Obj { get; set; } = null!;
+
+    public DRC_Instance BEO_DRC_Instance {get;set;} = null!;
+
+    public DRC_Instance DAO_DRC_Instance {get;set;} = null!;
+
+    public DRC_Instance Proxy_DRC_Instance {get;set;} = null!;
+
+    public ICollection<DRC_DataProvider> DRC_DataProviders { get; set;} = null!;
+
+    public ICollection<DRC_DSEntityAlloc> DRC_DSEntityAllocations {get;set;} = null!;
 }

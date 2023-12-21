@@ -22,4 +22,10 @@ public partial class BG_Kopf
     public bool PreviewData { get; set; }
 
     public string LayoutTypen { get; set; } = null!;
+
+    public DRC_Instance Print_DRC_Instance {get;set;} = null!;
+
+    public DRC_Instance Dialog_DRC_Instance {get;set;} = null!;
+
+    public List<DRC_DataProvider> DRC_DataProviders { get; set;} = null!;
 }
